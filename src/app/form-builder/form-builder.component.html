@@ -1,0 +1,154 @@
+<div class="box mat-primary">
+  <mat-card class="container">
+    <form [formGroup]="addFieldForm">
+      <mat-card-title> Add Fields To Form </mat-card-title>
+      <mat-card-content class="content">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Field Value</mat-label>
+          <input
+            matInput
+            placeholder="Placeholder"
+            formControlName="fieldValue"
+          />
+          <mat-error>This Field is required.</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Select Field Type</mat-label>
+          <mat-select
+            (valueChange)="handleFieldTypeChange($event)"
+            formControlName="fieldType"
+          >
+            @for(option of FieldTypeOptions; track option.id) {
+            <mat-option [value]="option.id">{{ option.name }}</mat-option>
+            }
+          </mat-select>
+          <mat-error>This Field is required.</mat-error>
+        </mat-form-field>
+
+        @if(showRequiredField) {
+        <mat-slide-toggle formControlName="isRequired"
+          >Is this Field Required ?</mat-slide-toggle
+        >
+        } @if(showAddOptionsForm) {
+        <div>
+          <div class="add-option-ctn">
+            <mat-form-field appearance="outline" class="add-option-field">
+              <mat-label>Add Select Options</mat-label>
+              <input
+                matInput
+                placeholder="Placeholder"
+                [formControl]="addOptionForm"
+              />
+              <mat-error>This Field is required.</mat-error>
+            </mat-form-field>
+            <button
+              mat-flat-button
+              class="btn bg-green"
+              (click)="handleAddOption()"
+              type="button"
+            >
+              Add
+            </button>
+          </div>
+          <div class="added-options">
+            @for(addedOption of addedOptionsList; track $index) {
+            <div>
+              <mat-divider></mat-divider>
+              <div class="added-option">
+                <p>{{ addedOption }}</p>
+                <img
+                  class="btn-delete"
+                  (click)="handleDeleteOption($index)"
+                  src="../../assets/delete.png"
+                />
+              </div>
+              <mat-divider></mat-divider>
+            </div>
+            }
+          </div>
+        </div>
+        }
+      </mat-card-content>
+      <mat-card-footer>
+        <button
+          mat-flat-button
+          class="btn"
+          (click)="handleCreateField()"
+          color="primary"
+          type="submit"
+        >
+          Create Field
+        </button>
+        <button
+          mat-flat-button
+          class="btn"
+          (click)="showFieldTable = !showFieldTable"
+          color="accent"
+          type="button"
+        >
+          {{ showFieldTable ? "Hide" : "Show" }} Fields Table & Raw Code
+        </button>
+      </mat-card-footer>
+    </form>
+  </mat-card>
+  @if(showFieldTable) {
+  <mat-card class="container">
+    <mat-card-title> Fields Table & </mat-card-title>
+    <mat-card-content class="content">
+      @if(formFieldsList.length === 0 ) {
+      <p>Please add Fields to view the Table</p>
+      } @else {
+      <div>
+        <app-fields-table
+          (tableDeleteEvent)="handleDeleteField($event)"
+          [FormFieldData]="formFieldsList"
+        ></app-fields-table>
+
+        <mat-form-field class="form-field">
+          <mat-label>Raw HTML Code</mat-label>
+          <textarea
+            [formControl]="rawCodeForm"
+            matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="3"
+          ></textarea>
+        </mat-form-field>
+      </div>
+      }
+    </mat-card-content>
+    <mat-card-footer>
+      <button
+        mat-flat-button
+        class="btn"
+        color="accent"
+        type="button"
+        [disabled]="formFieldsList.length === 0"
+        (click)="handleCopyFunction()"
+      >
+        Copy HTML Code
+      </button>
+
+      <button
+        mat-flat-button
+        class="btn"
+        color="primary"
+        type="button"
+        [disabled]="formFieldsList.length === 0"
+        (click)="handleFormSave()"
+      >
+        Save Form
+      </button>
+      <button
+        mat-flat-button
+        class="btn"
+        (click)="showFieldTable = !showFieldTable"
+        color="warn"
+        type="button"
+      >
+        Hide
+      </button>
+    </mat-card-footer>
+  </mat-card>
+  }
+</div>

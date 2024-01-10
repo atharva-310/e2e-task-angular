@@ -1,0 +1,12 @@
+.example-spacer {
+  flex: 1 1 auto;
+  background-color: var(--primary);
+}
+
+.btn {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.bg-green {
+  background-color: #6fbf73;
+}

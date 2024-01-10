@@ -1,0 +1,36 @@
+.added-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: first baseline;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: first baseline;
+}
+.content {
+  padding: 0px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+.added-option > p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  font-size: large;
+}
+.btn-delete {
+  cursor: pointer;
+  align-self: center;
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+.form-field {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

@@ -1,0 +1,100 @@
+<div class="box" style="background-color: #f44336">
+  <mat-card class="container">
+    <mat-card-title> Saved Forms </mat-card-title>
+    <mat-card-content class="content">
+      @for(form of savedForms; track $index) {
+      <div>
+        <mat-divider></mat-divider>
+        <div class="added-option">
+          <p>{{ form?.id }}</p>
+          <div class="actions">
+            <button
+              mat-flat-button
+              color="accent"
+              (click)="handleFormShow($index)"
+            >
+              Show
+            </button>
+            <img
+              class="btn-delete"
+              (click)="handleFormDelete($index)"
+              src="../../assets/delete.png"
+            />
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+      } @empty {
+      <p>
+        You Have not yet Saved any forms . Go to form Buidler and create one to
+        see.
+      </p>
+      }
+    </mat-card-content>
+  </mat-card>
+  @if(showForm && formIndexToShow != undefined ) {
+  <mat-card class="container">
+    <mat-card-title> {{ savedForms[formIndexToShow]?.id }} </mat-card-title>
+    <mat-card-content class="content">
+      @for(elementInfo of savedForms[formIndexToShow]?.data; track $index) {
+      @if(elementInfo.fieldTypeId == '0' ) {
+      <h1>{{ elementInfo.fieldValue }}</h1>
+      } @else if(elementInfo.fieldTypeId == '1' ) {
+      <h3>{{ elementInfo.fieldValue }}</h3>
+      } @else if(elementInfo.fieldTypeId == '2' ) {
+      <p>{{ elementInfo.fieldValue }}</p>
+      }@else if(elementInfo.fieldTypeId >= '3' && elementInfo.fieldTypeId <= '7'
+      ) {
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>{{ elementInfo.fieldValue }}</mat-label>
+        <input
+          matInput
+          [type]="elementInfo.typeHtml"
+          [required]="elementInfo.isRequired"
+        />
+        @if(elementInfo.isRequired) {
+        <mat-error>This Field is required.</mat-error>
+        }
+      </mat-form-field>
+      } @else if(elementInfo.fieldTypeId == '7' ) {
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+        <mat-datepicker></mat-datepicker>
+      </mat-form-field>
+      } @else if(elementInfo.fieldTypeId == '8' ) {
+      <mat-form-field class="form-field">
+        <mat-label>{{ elementInfo.fieldValue }}</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="3"
+        ></textarea>
+        @if(elementInfo.isRequired) {
+        <mat-error>This Field is required.</mat-error>
+        }
+      </mat-form-field>
+      } @else if(elementInfo.fieldTypeId == '9' ) {
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>{{ elementInfo.fieldValue }}</mat-label>
+        <mat-select>
+          @for(option of elementInfo.optionsArray; track $index) {
+          <mat-option [value]="$index">{{ option }}</mat-option>
+          }
+        </mat-select>
+        @if(elementInfo.isRequired) {
+        <mat-error>This Field is required.</mat-error>
+        }
+      </mat-form-field>
+      } @else if(elementInfo.fieldTypeId == '10' ) {
+      <button mat-flat-button color="accent">
+        {{ elementInfo.fieldValue }}
+      </button>
+      } }
+    </mat-card-content>
+  </mat-card>
+  }
+</div>

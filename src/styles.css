@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.box {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 20px;
+  background: #673ab7;
+}
+
+.container {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 40px;
+  min-width: 600px;
+
+  border-radius: 10px;
+  background-color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    min-width: 100%;
+  }
+}

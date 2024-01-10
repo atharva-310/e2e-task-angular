@@ -1,0 +1,92 @@
+.box {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 20px;
+  background: #673ab7;
+}
+
+.container {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  min-width: 600px;
+  /* min-height: 300px; */
+  border-radius: 10px;
+  background-color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    min-width: 100%;
+  }
+}
+
+.btn {
+  margin: 20px;
+  margin-top: 0px;
+  margin-left: 0px;
+}
+
+.content {
+  padding: 0px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+.form-field {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.add-option-ctn {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: first baseline;
+}
+
+.add-option-field {
+  width: 100%;
+}
+.add-option-field > input {
+  height: 48px !important;
+}
+.bg-green {
+  background-color: #4caf50;
+  color: white;
+  margin-left: 30px;
+}
+
+.added-options {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.added-option {
+  width: 100%;
+}
+.added-option {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.added-option > p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 10px;
+  font-size: large;
+}
+.btn-delete {
+  cursor: pointer;
+  align-self: center;
+  height: 30px;
+  width: 30px;
+}
